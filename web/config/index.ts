@@ -3,6 +3,21 @@ import { AgentStrategy } from '@/types/app'
 
 export let apiPrefix = ''
 export let publicApiPrefix = ''
+export let imageApiPreix: string | undefined = ''
+
+export let serverApiPreix = ''
+
+if (process.env.NEXT_PUBLIC_SERVER_URL)
+  serverApiPreix = process.env.NEXT_PUBLIC_SERVER_URL
+
+else
+  serverApiPreix = ''
+
+if (process.env.NEXT_PUBLIC_IMAGE_API_PREFIX)
+  imageApiPreix = process.env.NEXT_PUBLIC_IMAGE_API_PREFIX
+
+else
+  imageApiPreix = ''
 
 // NEXT_PUBLIC_API_PREFIX=/console/api NEXT_PUBLIC_PUBLIC_API_PREFIX=/api npm run start
 if (process.env.NEXT_PUBLIC_API_PREFIX && process.env.NEXT_PUBLIC_PUBLIC_API_PREFIX) {
@@ -139,6 +154,26 @@ export const DEFAULT_AGENT_SETTING = {
   tools: [],
 }
 
+export const uploadRequestBody = {
+  indexing_technique: 'high_quality',
+  process_rule: {
+    rules: {
+      pre_processing_rules: [{
+        id: 'remove_extra_spaces',
+        enabled: true,
+      }, {
+        id: 'remove_urls_emails',
+        enabled: true,
+      }],
+      segmentation: {
+        separator: '###',
+        max_tokens: 500,
+      },
+    },
+    mode: 'custom',
+  },
+}
+
 export const DEFAULT_AGENT_PROMPT = {
   chat: `Respond to the human as helpfully and accurately as possible. 
 
@@ -224,4 +259,8 @@ Begin! Reminder to ALWAYS respond with a valid json blob of a single action. Use
 Question: {{query}}
 Thought: {{agent_scratchpad}}
   `,
+}
+
+export const MODULE_SHOW_CONFIG = {
+  showUploadToDatasets: true,
 }

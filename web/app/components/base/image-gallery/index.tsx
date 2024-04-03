@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import cn from 'classnames'
 import s from './style.module.css'
 import ImagePreview from '@/app/components/base/image-uploader/image-preview'
+import { imageApiPreix } from '@/config'
 
 type Props = {
   srcs: string[]
@@ -43,9 +44,9 @@ const ImageGallery: FC<Props> = ({
           key={index}
           className={s.item}
           style={imgStyle}
-          src={src}
+          src={`${imageApiPreix}${src}`}
           alt=''
-          onClick={() => setImagePreviewUrl(src)}
+          onClick={() => setImagePreviewUrl(`${imageApiPreix}${src}`)}
         />
       ))}
       {

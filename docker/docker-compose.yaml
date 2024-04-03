@@ -206,7 +206,8 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:0.5.10
+#    image: langgenius/dify-web:0.5.10
+    image: difyapp
     restart: always
     environment:
       EDITION: SELF_HOSTED
@@ -220,11 +221,12 @@ services:
       APP_API_URL: ''
       # The DSN for Sentry error reporting. If not set, Sentry error reporting will be disabled.
       SENTRY_DSN: ''
+      SERVER_URL: 'https://sio.dev.teepeefire.midivi.cn'
     # uncomment to expose dify-web port to host
     # ports:
     #   - "3000:3000"
 
-  # The postgres database.
+    # The postgres database.
   db:
     image: postgres:15-alpine
     restart: always
