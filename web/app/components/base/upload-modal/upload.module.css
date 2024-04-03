@@ -1,0 +1,9 @@
+.upload_btn{
+    border: none!important;
+    box-shadow: none!important;
+    outline: none!important;
+    margin-left: 8px;
+}
+.upload_btn:hover{
+    background: rgb(235 245 255)!important;
+}

@@ -29,6 +29,9 @@ import {
   useDraggableUploader,
   useImageFiles,
 } from '@/app/components/base/image-uploader/hooks'
+// import UploadModal from "@/app/components/base/upload-dataset";
+import { MODULE_SHOW_CONFIG } from '@/config'
+import { UploadModal } from '@/app/components/base/upload-modal/UploadModal'
 
 type ChatInputProps = {
   visionConfig?: VisionConfig
@@ -56,6 +59,8 @@ const ChatInput: FC<ChatInputProps> = ({
   const { onDragEnter, onDragLeave, onDragOver, onDrop, isDragActive } = useDraggableUploader<HTMLTextAreaElement>({ onUpload, files, visionConfig })
   const isUseInputMethod = useRef(false)
   const [query, setQuery] = useState('')
+  const showUploadToDatasets = MODULE_SHOW_CONFIG.showUploadToDatasets
+
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value
     setQuery(value)
@@ -195,6 +200,9 @@ const ChatInput: FC<ChatInputProps> = ({
                   </div>
                 )
                 : null
+          }
+          {
+            showUploadToDatasets && <UploadModal />
           }
           <div className='mx-2 w-[1px] h-4 bg-black opacity-5' />
           {isMobile
